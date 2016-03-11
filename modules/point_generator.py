@@ -2,7 +2,7 @@ from architecture.module import Module
 import time
 import config
 
-class PointGenerator(Module):
+class PointGeneratorModule(Module):
 
 	point_time = 0
 

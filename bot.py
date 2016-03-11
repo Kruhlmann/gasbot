@@ -1,13 +1,14 @@
 #bot.py
+from architecture.module_manager import ModuleManager
 from modules.test import TestModule
 from modules.autism import AutismModule
 from modules.points_commands import PointsCommandsModule
 from modules.sound import SoundModule
 from modules.missions import MissionsModule
 from modules.uptime import UptimeModule
-from modules.point_generator import PointGenerator
+from modules.point_generator import PointGeneratorModule
+from modules.timeout import TimeOutModule
 
-from architecture.module_manager import ModuleManager
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
 import _thread
@@ -84,7 +85,8 @@ def module_thread(s):
 	module_manager.add_module(SoundModule("Sounds"))
 	module_manager.add_module(MissionsModule("Missions"))
 	module_manager.add_module(UptimeModule("Uptime", time.time()))
-	module_manager.add_module(PointGenerator("Point generator", time.time()))
+	module_manager.add_module(PointGeneratorModule("Point generator", time.time()))
+	module_manager.add_module(TimeOutModule("Timeout"))
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:
