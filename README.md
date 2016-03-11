@@ -6,7 +6,7 @@ Old code can be found at my ruwbot repo
 ## Modules
 
 ###### Test Module
-Displays the emote Kappa every time it recieves inpu form the channel.
+Displays the emote Kappa every time it recieves input form the channel.
 
 ###### Sound Module
 Allows users to play sounds on the broadcasters computer for a cost of points set by the broadcaster in the configuration file
