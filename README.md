@@ -21,7 +21,7 @@ Allows users to join missions created by the broadcaster. The winner of a specif
 Gives users 1 point every `x` second where `x` is decided by the broadcaster in the configurations file
 
 ###### Uptime Module
-Displays how long the bot has been running for when reciving the `!uptime` command
+Displays how long the bot has been running for when recieving the `!uptime` command
 
 ##### Autism
 Displays a semi-random level of 'autism' for a specific user with the `!autism user` command. If no user is specified it will target the sender.
