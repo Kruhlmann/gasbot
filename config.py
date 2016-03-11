@@ -1,9 +1,15 @@
 # Set all the variables necessary to connect to Twitch IRC 
-CHAN = "CHANNEL"
+CHAN = "gasolinebased"
 HOST = "irc.twitch.tv"
-NICK = "BOT_NAME"
+NICK = "ruwbot"
+#NICK = "420blazeitdawg"
+#NICK = "fwnaeuifbweoyi" 
+#NICK = "superkilla6969" 
 PORT = 6667
-PASS = "oauth:"
+PASS = "oauth:njw1u384049845dlh9wtneufidej21"
+#PASS = "oauth:grd7uyutlfk7ule3u4vw66obmls6ma"
+#PASS = "oauth:891j6yyz3nqg38afw1alxrn58eba07" 
+#PASS = "oauth:50etklh4bcedtp9s5zi5muuux3xw0x" 
 
 
 sounds = {
@@ -77,3 +83,5 @@ sound_combos = {
 PREMIUM_SOUND_COST = 200
 SOUND_COMBO_COST = 25
 SOUND_COST = 10
+#Seconds
+POINT_INTERVAL = 60

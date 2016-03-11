@@ -1,10 +1,15 @@
 #message_queue.py
 
 recieve_queue = []
-send_queue = []
+sender_queue = []
 
 def append_message(username, message):
-	recieve_queue.append(Message(username, message))
+	if message is not None:
+		recieve_queue.append(Message(username, message))
+
+def send(message):
+	if message is not None:
+		sender_queue.append(message)
 
 class Message():
 	username = ""

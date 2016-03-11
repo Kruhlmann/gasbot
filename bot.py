@@ -3,6 +3,9 @@ from modules.test import TestModule
 from modules.autism import AutismModule
 from modules.points_commands import PointsCommandsModule
 from modules.sound import SoundModule
+from modules.missions import MissionsModule
+from modules.uptime import UptimeModule
+from modules.point_generator import PointGenerator
 
 from architecture.module_manager import ModuleManager
 import socket #imports module allowing connection to IRC
@@ -15,6 +18,7 @@ import re
 import string
 import json
 import sqlite3
+
 import message_queue
 from message_queue import Message
 import config
@@ -73,10 +77,14 @@ def module_thread(s):
 	db_manager.update_emote_db()
 	module_manager = ModuleManager()
 
-	module_manager.add_module(TestModule("test module"))
-	module_manager.add_module(AutismModule("autism meter"))
-	module_manager.add_module(PointsCommandsModule("point commands"))
-	module_manager.add_module(SoundModule("sounds"))
+	#ADD MODULES
+	module_manager.add_module(TestModule("Test module"))
+	module_manager.add_module(AutismModule("Autism meter"))
+	module_manager.add_module(PointsCommandsModule("Point commands"))
+	module_manager.add_module(SoundModule("Sounds"))
+	module_manager.add_module(MissionsModule("Missions"))
+	module_manager.add_module(UptimeModule("Uptime", time.time()))
+	module_manager.add_module(PointGenerator("Point generator", time.time()))
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:
@@ -98,9 +106,8 @@ def module_thread(s):
 				db_manager.create_user(username)
 				message_queue.send_queue.append("Welcome " + username + "! You have now been registered in the database and will start earning points! PogChamp")
 			
-			del message_queue.recieve_queue[0]
 			#REMOVE MESSAGEz
-		
+			del message_queue.recieve_queue[0]
 
 def sender_thread(s):
 
@@ -113,12 +120,12 @@ def sender_thread(s):
 	print("SENDER THREAD: ONLINE #" + config.CHAN)
 
 	while True:
-		while len(message_queue.send_queue) > 0:
-			send_message(message_queue.send_queue[0])
-			del message_queue.send_queue[0]
-			time.sleep(1) 
-			#limit is 1.5 seconds so we put a threshold to not get global banned
-			
+		for i in range(0, len(message_queue.sender_queue)):
+			if(message_queue.sender_queue[0] is not None):
+				send_message(message_queue.sender_queue[0])
+			del message_queue.sender_queue[0]
+			time.sleep(1.5) 
+
 
 if __name__ == "__main__":
 	s = socket.socket()

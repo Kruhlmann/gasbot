@@ -4,7 +4,6 @@ import config
 
 class PointsCommandsModule(Module):
 
-
 	def get_user_points(username, db_manager, command_args):
 		sender = username
 		if len(command_args) > 1:
@@ -56,7 +55,6 @@ class PointsCommandsModule(Module):
 				return ("The user " + user + " was not found. Creating the user in the database now")
 				db_manager.create_user(user, points)
 			else:
-				print("Giving user " + user + " " + points + " points")
 				db_manager.update_user(user, user_points + points)
 				return ("User " + user + " was given " + str(points) + " points")
 		else:
