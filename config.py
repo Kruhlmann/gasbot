@@ -1,9 +1,9 @@
 # Set all the variables necessary to connect to Twitch IRC 
-CHAN = ""
+CHAN = "gasolinebased"
 HOST = "irc.twitch.tv"
-NICK = ""
+NICK = "ruwbot"
 PORT = 6667
-PASS = "oauth:"
+PASS = "oauth:njw1u384049845dlh9wtneufidej21"
 
 
 sounds = {

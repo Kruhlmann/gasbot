@@ -16,7 +16,6 @@ class UptimeModule(Module):
 
 	def stop_watch(self):
 		seconds = time.time() - self.start_time;
-		print(str(time.time()) + " " + str(self.start_time))
 		minutes = 0
 		hours = 0
 		while seconds > 60:

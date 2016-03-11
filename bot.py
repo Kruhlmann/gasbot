@@ -8,6 +8,7 @@ from modules.missions import MissionsModule
 from modules.uptime import UptimeModule
 from modules.point_generator import PointGeneratorModule
 from modules.timeout import TimeOutModule
+from modules.duel import DuelModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -79,7 +80,7 @@ def module_thread(s):
 	module_manager = ModuleManager()
 
 	#ADD MODULES
-	module_manager.add_module(TestModule("Test module"))
+	module_manager.add_module(TestModule("Test"))
 	module_manager.add_module(AutismModule("Autism meter"))
 	module_manager.add_module(PointsCommandsModule("Point commands"))
 	module_manager.add_module(SoundModule("Sounds"))
@@ -87,6 +88,7 @@ def module_thread(s):
 	module_manager.add_module(UptimeModule("Uptime", time.time()))
 	module_manager.add_module(PointGeneratorModule("Point generator", time.time()))
 	module_manager.add_module(TimeOutModule("Timeout"))
+	module_manager.add_module(DuelModule("Duel"))
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:
@@ -106,7 +108,7 @@ def module_thread(s):
 			#Create user if not exists
 			if not db_manager.user_exists(username):
 				db_manager.create_user(username)
-				message_queue.send_queue.append("Welcome " + username + "! You have now been registered in the database and will start earning points! PogChamp")
+				message_queue.send("Welcome " + username + "! You have now been registered in the database and will start earning points! PogChamp")
 			
 			#REMOVE MESSAGEz
 			del message_queue.recieve_queue[0]

@@ -50,7 +50,7 @@ class PointsCommandsModule(Module):
 			user_points = db_manager.get_user_points(username)
 
 			if points == False:
-				return (command_args[1] + " is not a number")
+				return (command_args[1] + " is not a number FailFish")
 			if user_points == None:
 				return ("The user " + user + " was not found. Creating the user in the database now")
 				db_manager.create_user(user, points)
