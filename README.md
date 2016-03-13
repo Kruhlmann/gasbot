@@ -4,7 +4,7 @@ A feature rich twitch moderation bot made with python 3.*
 Old code can be found at my ruwbot repo
 
 ## Installation
-Download the source code and place it somewhere on your computer. Make sure you have python 3 installed and added to your PATH variable. The bot has to be configured via the config.py file in order to run. To run the bot simply run the run.bat file (if you encounter problems try running the file as administrator) 
+Download the source code and place it somewhere on your computer. Make sure you have python 3 installed and added to your PATH variable. The bot has to be configured via the [config.py](config.py) and [password.py](password.py) files in order to run. To run the bot simply run the [run.bat](run.bat) file (if you encounter problems try running the file as administrator) 
 
 ## Modules
 
@@ -37,6 +37,9 @@ Users can challenge eachother to duels using the `!duel user amount` command and
 
 #### [Time Out Module](modules/timeout.py)
 Allows users to time eachother out for a specified amount of time and a cost of points. Users can be protected such as mods and the broadcaster in the configuration file. These users can't be time out regardless but users who attempt to time them out won't be charged points if they exist in the protected users list. The command to buy a time out is `!buytimeout target_user`
+
+#### [Show Emote Module](modules/show_emote.py)
+Using the `!showemote emote` command will display the specified emote on the broadcasters stream if they are running the [Emote Displayer](https://github.com/Kruhlmann/EmoteDisplayer) program.
 
 ## Missions
 
