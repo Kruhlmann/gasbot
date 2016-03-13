@@ -23,7 +23,7 @@ Allows users to join missions created by the broadcaster. The winner of a specif
 #### Points Genrator Module
 Gives users 1 point every `x` second where `x` is decided by the broadcaster in the configurations file
 
-#### Uptime Module
+#### [Uptime Module](modules/uptime.py)
 Displays how long the bot has been running for when recieving the `!uptime` command
 
 #### Autism Module
