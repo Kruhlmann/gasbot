@@ -3,6 +3,10 @@ A feature rich twitch moderation bot made with python 3.*
 
 Old code can be found at my ruwbot repo
 
+### Questions, concerns and suggestions
+If you want to contact me the best way is to join my discord server. You do not need to download anything as there is a web application. [Join the discord](https://discord.gg/0k3DuGIrUjI25sUu). You can also message me [Twitch](https://www.twitch.tv/message/compose?to=gasolinebased) or send me an [e-mail](mailto:gasolinebased@gmail.com).
+
+
 ## Installation
 Download the source code and place it somewhere on your computer. Make sure you have python 3 installed and added to your PATH variable. The bot has to be configured via the [config.py](config.py) and [password.py](password.py) files in order to run. To run the bot simply run the [run.bat](run.bat) file (if you encounter problems try running the file as administrator) 
 
