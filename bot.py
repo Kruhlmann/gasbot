@@ -11,6 +11,7 @@ from modules.timeout import TimeOutModule
 from modules.duel import DuelModule
 from modules.custom_commands import CustomCommandsModule
 from modules.show_emote import ShowEmoteModule
+from modules.rps import RPSModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -92,6 +93,8 @@ def module_thread(s):
 	module_manager.add_module(DuelModule("Duel"))
 	module_manager.add_module(CustomCommandsModule("Custom Commands"))
 	module_manager.add_module(ShowEmoteModule("Show Emote"))
+	module_manager.add_module(RPSModule("Rock, Paper, Scissors"))
+
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:
@@ -137,6 +140,7 @@ def sender_thread(s):
 if __name__ == "__main__":
 	s = socket.socket()
 	s.connect((config.HOST, config.PORT))
+	s.send(("CAP REQ :twitch.tv/membership \r\n").encode())
 	s.send(("PASS " + config.PASS + "\r\n").encode())
 	s.send(("NICK " + config.NICK + "\r\n").encode())
 	s.send(("JOIN #" + config.CHAN + " \r\n").encode())
