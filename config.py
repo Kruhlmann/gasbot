@@ -1,10 +1,21 @@
+import password
+
 # Set all the variables necessary to connect to Twitch IRC 
 CHAN = "gasolinebased"
 HOST = "irc.twitch.tv"
 NICK = "ruwbot"
 PORT = 6667
-PASS = "oauth:njw1u384049845dlh9wtneufidej21"
+PASS = password.PASS
 
+PREMIUM_SOUND_COST = 200
+SOUND_COMBO_COST = 25
+SOUND_COST = 10
+#Seconds
+POINT_INTERVAL = 60
+TIME_OUT_COST = 500
+#Seconds
+TIME_OUT_DURATION = 30
+DISPLAY_EMOTE_COST = 0
 
 sounds = {
 "test",
@@ -73,15 +84,6 @@ sound_combos = {
 	"collegespank;collegeboy;spank",
 	"suction;whatareyoudoing;suction"
 }
-
-PREMIUM_SOUND_COST = 200
-SOUND_COMBO_COST = 25
-SOUND_COST = 10
-#Seconds
-POINT_INTERVAL = 60
-TIME_OUT_COST = 500
-#Seconds
-TIME_OUT_DURATION = 30
 
 PROTECTED_USERS = {
 	"gasolinebased",

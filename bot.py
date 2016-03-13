@@ -10,6 +10,7 @@ from modules.point_generator import PointGeneratorModule
 from modules.timeout import TimeOutModule
 from modules.duel import DuelModule
 from modules.custom_commands import CustomCommandsModule
+from modules.show_emote import ShowEmoteModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -38,7 +39,6 @@ def recive_thread(s):
 	readbuffer = ""
 
 	# Connecting to Twitch IRC by passing credentials and joining a certain channel 
-	
 	
 	print("RECIEV THREAD: ONLINE #" + config.CHAN)
 
@@ -81,7 +81,7 @@ def module_thread(s):
 	module_manager = ModuleManager()
 
 	#ADD MODULES
-	module_manager.add_module(TestModule("Test"))
+	#module_manager.add_module(TestModule("Test"))
 	module_manager.add_module(AutismModule("Autism meter"))
 	module_manager.add_module(PointsCommandsModule("Point commands"))
 	module_manager.add_module(SoundModule("Sounds"))
@@ -90,7 +90,8 @@ def module_thread(s):
 	module_manager.add_module(PointGeneratorModule("Point generator", time.time()))
 	module_manager.add_module(TimeOutModule("Timeout"))
 	module_manager.add_module(DuelModule("Duel"))
-	module_manager.add_module(CustomCommandsModule("Duel"))
+	module_manager.add_module(CustomCommandsModule("Custom Commands"))
+	module_manager.add_module(ShowEmoteModule("Show Emote"))
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:

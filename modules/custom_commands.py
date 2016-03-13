@@ -1,9 +1,12 @@
 from architecture.module import Module
 from custom.commands import command_list
+import config
 
 class CustomCommandsModule(Module):
 
 	def update(self, username, db_manager, command_args):
+		if username == config.NICK:
+			return None
 		for key, value in command_list.items():
 			if command_args[0] == key:
 				return value.replace("$username", username)
