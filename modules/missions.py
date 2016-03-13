@@ -1,5 +1,5 @@
 from architecture.module import Module
-from missions.emote_mission import EmoteMission
+from missions.emote import EmoteMission
 import config
 
 class MissionsModule(Module):
