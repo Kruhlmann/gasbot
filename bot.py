@@ -9,6 +9,7 @@ from modules.uptime import UptimeModule
 from modules.point_generator import PointGeneratorModule
 from modules.timeout import TimeOutModule
 from modules.duel import DuelModule
+from modules.custom_commands import CustomCommandsModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -89,6 +90,7 @@ def module_thread(s):
 	module_manager.add_module(PointGeneratorModule("Point generator", time.time()))
 	module_manager.add_module(TimeOutModule("Timeout"))
 	module_manager.add_module(DuelModule("Duel"))
+	module_manager.add_module(CustomCommandsModule("Duel"))
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:
