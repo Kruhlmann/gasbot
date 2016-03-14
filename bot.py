@@ -12,6 +12,7 @@ from modules.duel import DuelModule
 from modules.custom_commands import CustomCommandsModule
 from modules.show_emote import ShowEmoteModule
 from modules.rps import RPSModule
+from modules.emote_combo import EmoteComboModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -82,7 +83,7 @@ def module_thread(s):
 	module_manager = ModuleManager()
 
 	#ADD MODULES
-	#module_manager.add_module(TestModule("Test"))
+	module_manager.add_module(TestModule("Test"))
 	module_manager.add_module(AutismModule("Autism meter"))
 	module_manager.add_module(PointsCommandsModule("Point commands"))
 	module_manager.add_module(SoundModule("Sounds"))
@@ -94,6 +95,7 @@ def module_thread(s):
 	module_manager.add_module(CustomCommandsModule("Custom Commands"))
 	module_manager.add_module(ShowEmoteModule("Show Emote"))
 	module_manager.add_module(RPSModule("Rock, Paper, Scissors"))
+	module_manager.add_module(EmoteComboModule("Emote Combo"))
 
 
 	while True:
