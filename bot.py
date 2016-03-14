@@ -83,7 +83,7 @@ def module_thread(s):
 	module_manager = ModuleManager()
 
 	#ADD MODULES
-	module_manager.add_module(TestModule("Test"))
+	#module_manager.add_module(TestModule("Test"))
 	module_manager.add_module(AutismModule("Autism meter"))
 	module_manager.add_module(PointsCommandsModule("Point commands"))
 	module_manager.add_module(SoundModule("Sounds"))
