@@ -11,7 +11,7 @@ class EmoteComboModule(Module):
 			if db_manager.is_emote(part):
 				if part == self.current_emote:
 					self.emote_count += 1
-					if emote_count % 10 == 0:
+					if self.emote_count % 10 == 0:
 							return "PogChamp the emote " + self.current_emote + " has been spammed " + str(self.emote_count) + " times in a row!"
 					break
 				else:
