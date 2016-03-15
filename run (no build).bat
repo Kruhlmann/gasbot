@@ -4,5 +4,5 @@ color
 cls
 set PATH=%PATH%;%cd%\includes\ansicon
 includes\ansicon\ansicon.exe -i
-python bot.py
+python -B bot.py
 pause

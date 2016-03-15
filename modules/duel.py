@@ -26,7 +26,7 @@ class DuelModule(Module):
 			return("Sorry " + duelist1 + ", you requested a duel for " + str(amount) + " points but your opponent only has " + str(duelist2_points) + " FeelsBadMan")
 		db_manager.query("SELECT * FROM duels WHERE duelist1=\'" + duelist1 + "\' AND duelist2=\'" + duelist2 + "\'")
 		if db_manager.get_cursor().fetchone() is not None:
-			return (duelist1 + " you have already requested a duel with " + duelist2 + " (" + str(amount) + " points)")
+			return (duelist1 + " you have already requested a duel with " + duelist2)
 		else:		
 			db_manager.query("SELECT * FROM duels WHERE duelist2=\'" + duelist2 + "\'")
 			if db_manager.get_cursor().fetchone():

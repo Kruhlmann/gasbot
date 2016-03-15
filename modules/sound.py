@@ -4,7 +4,6 @@ import winsound
 
 class SoundModule(Module):
 
-
 	def play_sound(username, db_manager, command_args):
 		if len(command_args) < 2:
 			sounds = ""
@@ -23,7 +22,7 @@ class SoundModule(Module):
 				else:
 					return("The sound " + command_args[1] +  " is not in the library! You have not been charged any points.")
 			else:
-				return("Sorry " + username + " you need " + str(config.SOUND_COST) + " points to play a sound! (You have " + points + ")")
+				return("Sorry " + username + " you need " + str(config.SOUND_COST) + " points to play a sound! (You have " + str(points) + ")")
 
 	def play_premium_sound(username, db_manager, command_args):
 		if len(command_args) < 2:
@@ -43,7 +42,7 @@ class SoundModule(Module):
 				else:
 					return("The premium sound " + command_args[1] +  " is not in the library! You have not been charged any points.")
 			else:
-				return("Sorry " + username + " you need " + str(config.PREMIUM_SOUND_COST) + " points to play a premium sound! (You have " + points + ")")
+				return("Sorry " + username + " you need " + str(config.PREMIUM_SOUND_COST) + " points to play a premium sound! (You have " + str(points) + ")")
 
 	def play_sound_combo(username, db_manager, command_args):
 		if len(command_args) < 2:
@@ -80,7 +79,7 @@ class SoundModule(Module):
 				else:
 					return("The sound combo " + command_args[1] +  " is not in the library! You have not been charged any points.")
 			else:
-				return("Sorry " + username + " you need " + str(config.SOUND_COMBO_COST) + " points to play a premium sound! (You have " + points + ")")
+				return("Sorry " + username + " you need " + str(config.SOUND_COMBO_COST) + " points to play a premium sound! (You have " + str(points) + ")")
 
 	functions = {
 		"!playsound" : play_sound,

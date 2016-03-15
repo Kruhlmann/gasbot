@@ -3,9 +3,11 @@ class Mission():
 	initiator = ""
 	has_finished = False
 	result = ""
+	prize = 0
 
-	def __init__(self, initiator):
-		self.initiator = initiator;
+	def __init__(self, initiator, prize):
+		self.initiator = initiator
+		self.prize = prize
 	
 	def initialize(self):
 		pass

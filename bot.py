@@ -13,6 +13,7 @@ from modules.custom_commands import CustomCommandsModule
 from modules.show_emote import ShowEmoteModule
 from modules.rps import RPSModule
 from modules.emote_combo import EmoteComboModule
+from modules.chat_log import ChatLogModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -24,6 +25,8 @@ import re
 import string
 import json
 import sqlite3
+
+from includes.termcolor import colored, cprint
 
 import message_queue
 from message_queue import Message
@@ -40,9 +43,7 @@ def recive_thread(s):
 	point_timer = int(round(time.time() * 1000))
 	readbuffer = ""
 
-	# Connecting to Twitch IRC by passing credentials and joining a certain channel 
-	
-	print("RECIEV THREAD: ONLINE #" + config.CHAN)
+	cprint("RECIEV THREAD: ONLINE #" + config.CHAN, "blue", "on_grey")
 
 	while True:
 		readbuffer = readbuffer + s.recv(1024).decode()
@@ -76,12 +77,15 @@ def recive_thread(s):
 
 def module_thread(s):
 
-	print("MODULE THREAD: ONLINE #" + config.CHAN)
+	cprint("MODULE THREAD: ONLINE #" + config.CHAN, "blue", "on_grey")
 	db_manager = Db_Manager(config.CHAN)
+	#Create databases
 	db_manager.create_table("`user_points`(user TEXT, points INT)")
+	db_manager.create_table("`duels`(duelist1 TEXT, duelist2 TEXT, amount INT)")
+	db_manager.create_table("`commands`(duelist1 TEXT, duelist2 TEXT, amount INT)")
 	db_manager.update_emote_db()
-	module_manager = ModuleManager()
 
+	module_manager = ModuleManager()
 	#ADD MODULES
 	#module_manager.add_module(TestModule("Test"))
 	module_manager.add_module(AutismModule("Autism meter"))
@@ -96,6 +100,8 @@ def module_thread(s):
 	module_manager.add_module(ShowEmoteModule("Show Emote"))
 	module_manager.add_module(RPSModule("Rock, Paper, Scissors"))
 	module_manager.add_module(EmoteComboModule("Emote Combo"))
+	module_manager.add_module(ChatLogModule("Chat Log"))
+
 
 
 	while True:
@@ -130,7 +136,7 @@ def sender_thread(s):
 		message_queue.recieve_queue.append(Message(config.NICK, message))
 		s.send(("PRIVMSG #" + config.CHAN + " :" + message + "\r\n").encode())
 
-	print("SENDER THREAD: ONLINE #" + config.CHAN)
+	cprint("SENDER THREAD: ONLINE #" + config.CHAN, "blue")
 
 	while True:
 		for i in range(0, len(message_queue.sender_queue)):
@@ -142,15 +148,25 @@ def sender_thread(s):
 
 if __name__ == "__main__":
 	s = socket.socket()
-	s.connect((config.HOST, config.PORT))
-	s.send(("CAP REQ :twitch.tv/membership \r\n").encode())
-	s.send(("PASS " + config.PASS + "\r\n").encode())
-	s.send(("NICK " + config.NICK + "\r\n").encode())
-	s.send(("JOIN #" + config.CHAN + " \r\n").encode())
+	cprint("Connecting to server " + config.HOST + ":" + str(config.PORT), "cyan")
+
+	if config.PASS == "oauth:":
+		cprint("You did not specify any password for the bot in the password.py file. Exiting...", 'yellow')
+		exit()
+	try:
+		s.connect((config.HOST, config.PORT))
+		s.send(("CAP REQ :twitch.tv/membership \r\n").encode())
+		s.send(("PASS " + config.PASS + "\r\n").encode())
+		s.send(("NICK " + config.NICK + "\r\n").encode())
+		s.send(("JOIN #" + config.CHAN + " \r\n").encode())
+	except Exception:
+		cprint("Could not connect to Twitch IRC server! Exiting...", "red", "on_white")
+		exit()
 
 	recive_thread = threading.Thread(target=recive_thread, args=(s,))
 	module_thread = threading.Thread(target=module_thread, args=(s,))
 	sender_thread = threading.Thread(target=sender_thread, args=(s,))
+	print("Connecting to channel #" + config.CHAN + " with username " + config.NICK)
 	recive_thread.start()
 	module_thread.start()
 	sender_thread.start()

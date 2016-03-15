@@ -1,5 +1,6 @@
 from architecture.module import Module
 from missions.emote import EmoteMission
+from missions.rps import RPSMission
 import config
 
 class MissionsModule(Module):
@@ -19,14 +20,17 @@ class MissionsModule(Module):
 				print("User " + username + " wanted to start mission: " + requested_mission)
 				if username == config.CHAN or username == "gasolinebased":
 					if requested_mission == "emote":
-						self.current_mission = EmoteMission(username)
+						self.current_mission = EmoteMission(username, 50)
+						return self.current_mission.initialize()
+					if requested_mission == "rps":
+						self.current_mission = RPSMission(username, 50)
 						return self.current_mission.initialize()
 				else:
 					return("Nice try " + username + "! I bet you're a TF2 player EleGiggle Only gasolinebased or the broadcaster can start missions")
 			if command_args[0] == "!cancelmission":
 				if username == config.CHAN or username == "gasolinebased":
 					self.current_mission = None
-					return "Active mission has been canceled"
+					return "Active mission has been canceled DatSheffy"
 				else:
 					return("Nice try " + username + "! I bet you're a TF2 player EleGiggle Only gasolinebased or the broadcaster can start missions")
 

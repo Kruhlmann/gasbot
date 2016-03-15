@@ -12,7 +12,7 @@ class EmoteMission(Mission):
 		cursor = emote_db.cursor()
 		cursor.execute("SELECT name FROM emotes ORDER BY random() LIMIT 1")
 		self.emote = cursor.fetchone()[0]
-		return ("Emote mission started! The first user to type the emote " + self.emote + " wins 50 points!")
+		return ("Emote mission started! The first user to type the emote " + self.emote + " wins " + str(self.prize) + " points!")
 
 	def update(self, username, db_manager, command_args):
 		if username == config.NICK:
@@ -23,11 +23,11 @@ class EmoteMission(Mission):
 
 				if user_points == None:
 					print ("The user " + username + " was not found. Creating the user in the database now")
-					db_manager.create_user(username, points)
+					db_manager.create_user(username)
 				else:
-					print("Awarding user " + username + " " + str(50) + " points")
-					db_manager.update_user(username, user_points + 50)
-				self.result = "User " + username + " was the first to type " + self.emote + " in chat and has won 50 points!"
+					print("Awarding user " + username + " " + str(self.prize) + " points")
+					db_manager.update_user(username, user_points + self.prize)
+				self.result = "User " + username + " was the first to type " + self.emote + " in chat and has won " + str(self.prize) + " points!"
 				self.has_finished = True
 
 	def get_name(self):
