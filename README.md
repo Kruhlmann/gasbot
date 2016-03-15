@@ -51,3 +51,6 @@ Missions can be activated by the broadcaster and the user(s) to fulfill the requ
 
 #### [Emote Mission](missions/emote.py)
 The bot will announce a random emote in the chat. The first user to type the same emote in the chat wins.
+
+#### [RPS Mission](missions/rps.py)
+The first user to win against the bot in !rps wins the prize.
