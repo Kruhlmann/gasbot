@@ -1,6 +1,7 @@
 from architecture.module import Module
 from missions.emote import EmoteMission
 from missions.rps import RPSMission
+from includes.termcolor import colored, cprint
 import config
 
 class MissionsModule(Module):
@@ -17,7 +18,7 @@ class MissionsModule(Module):
 		else:
 			if command_args[0] == "!startmission":
 				requested_mission = command_args[1]
-				print("User " + username + " wanted to start mission: " + requested_mission)
+				cprint("User " + username + " wanted to start mission: " + requested_mission, "cyan")
 				if username == config.CHAN or username == "gasolinebased":
 					if requested_mission == "emote":
 						self.current_mission = EmoteMission(username, 50)

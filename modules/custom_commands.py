@@ -23,11 +23,14 @@ class CustomCommandsModule(Module):
 				return value.replace("$username", username)
 
 		q = db_manager.query("SELECT body FROM commands WHERE trigger=\'" + command_args[0] + "\'")
-		p = q.fetchone()
-		if p == None:
+		if q == None:
 			return None
 		else:
-			return format_command(p[0], username)
+			p = q.fetchone()
+			if p is not None:
+				cprint("User " + username + " requested an execution of the custom command '" + command_args)
+				return format_command(p[0], username)
+			return None
 
 	def stop_watch(self):
 		seconds = time.time() - self.start_time;

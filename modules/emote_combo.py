@@ -6,6 +6,9 @@ class EmoteComboModule(Module):
 	emote_count = 0
 
 	def update(self, username, db_manager, command_args):
+		#Not implemented yet
+		
+		return None
 		for part in command_args:
 			print(part + " " + str(db_manager.is_emote(part)))
 			if db_manager.is_emote(part):

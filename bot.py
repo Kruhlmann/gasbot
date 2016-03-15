@@ -43,7 +43,7 @@ def recive_thread(s):
 	point_timer = int(round(time.time() * 1000))
 	readbuffer = ""
 
-	cprint("RECIEV THREAD: ONLINE #" + config.CHAN, "blue", "on_grey")
+	cprint("RECIEV THREAD: ONLINE #" + config.CHAN, "green")
 
 	while True:
 		readbuffer = readbuffer + s.recv(1024).decode()
@@ -77,12 +77,12 @@ def recive_thread(s):
 
 def module_thread(s):
 
-	cprint("MODULE THREAD: ONLINE #" + config.CHAN, "blue", "on_grey")
+	cprint("MODULE THREAD: ONLINE #" + config.CHAN, "green")
 	db_manager = Db_Manager(config.CHAN)
 	#Create databases
 	db_manager.create_table("`user_points`(user TEXT, points INT)")
 	db_manager.create_table("`duels`(duelist1 TEXT, duelist2 TEXT, amount INT)")
-	db_manager.create_table("`commands`(duelist1 TEXT, duelist2 TEXT, amount INT)")
+	db_manager.create_table("`commands`(body TEXT, trigger TEXT)")
 	db_manager.update_emote_db()
 
 	module_manager = ModuleManager()
@@ -111,7 +111,10 @@ def module_thread(s):
 
 			#PROCESS MESSAGE
 			try:
-				print("> " + username + ": " + message)
+				color = "white"
+				if username == "ruwbot":
+					color = "yellow"
+				cprint("> " + username + ": " + message, color)
 			except:
 				print("> UTF-8 error")
 				del message_queue.recieve_queue[0]
@@ -136,7 +139,7 @@ def sender_thread(s):
 		message_queue.recieve_queue.append(Message(config.NICK, message))
 		s.send(("PRIVMSG #" + config.CHAN + " :" + message + "\r\n").encode())
 
-	cprint("SENDER THREAD: ONLINE #" + config.CHAN, "blue")
+	cprint("SENDER THREAD: ONLINE #" + config.CHAN, "green")
 
 	while True:
 		for i in range(0, len(message_queue.sender_queue)):
@@ -166,7 +169,7 @@ if __name__ == "__main__":
 	recive_thread = threading.Thread(target=recive_thread, args=(s,))
 	module_thread = threading.Thread(target=module_thread, args=(s,))
 	sender_thread = threading.Thread(target=sender_thread, args=(s,))
-	print("Connecting to channel #" + config.CHAN + " with username " + config.NICK)
+	cprint("Connecting to channel #" + config.CHAN + " with username " + config.NICK, "cyan")
 	recive_thread.start()
 	module_thread.start()
 	sender_thread.start()

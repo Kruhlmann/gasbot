@@ -1,6 +1,7 @@
 #db_manager.py
 import sqlite3
 import json
+from includes.termcolor import colored, cprint
 
 try:
 	import urllib.request as urllib2
@@ -45,9 +46,13 @@ class Db_Manager():
 		self.db.commit()
 
 	def query(self, query):
-		self.cursor.execute(query)
-		self.db.commit()
-		return self.cursor
+		try:
+			self.cursor.execute(query)
+			self.db.commit()
+			return self.cursor
+		except sqlite3.OperationalError as e:
+			cprint("Sqlite exception in query function: `" + str(e) + "` on query `" + query + "`", "red", "on_white")
+			return None
 
 	def get_cursor(self):
 		return self.cursor

@@ -13,6 +13,6 @@ def log_user_message(username, command_args):
 	for part in command_args:
 		message += part + " "
 
-	log_file = open("logs/" + username + ".txt", "w")
-	log_file.write(strftime("%Y-%m-%d %H:%M:%S") + " " + message)
+	log_file = open("logs/" + username + ".txt", "a+")
+	log_file.write(strftime("%Y-%m-%d %H:%M:%S") + " " + message + "\n")
 	log_file.close()

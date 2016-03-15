@@ -1,5 +1,6 @@
 from architecture.module import Module
 import random
+import event_overview
 
 class RPSModule(Module):
 
@@ -27,9 +28,11 @@ class RPSModule(Module):
 					if bot_pick_text == "paper":
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.bot_win
 					if bot_pick_text == "scissors":
+						event_overview.latest_rps_winner = username
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.user_win
 				elif user_pick == "paper":
 					if bot_pick_text == "rock":
+						event_overview.latest_rps_winner = username
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.user_win
 					if bot_pick_text == "paper":
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.tie
@@ -39,6 +42,7 @@ class RPSModule(Module):
 					if bot_pick_text == "rock":
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.bot_win
 					if bot_pick_text == "paper":
+						event_overview.latest_rps_winner = username
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.user_win
 					if bot_pick_text == "scissors":
 						return "Result: [" + user_pick + " vs " + bot_pick_text + "] " + username +  self.tie

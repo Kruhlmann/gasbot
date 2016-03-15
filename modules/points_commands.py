@@ -32,11 +32,11 @@ class PointsCommandsModule(Module):
 				else:
 					roll = randint(5, 100)
 					if roll < 50:
-						return (username + " just won " + str(gamble) + " points in the roulette FeelsGoodMan")
 						db_manager.update_user(username, user_points + gamble)
+						return (username + " just won " + str(gamble) + " points in the roulette FeelsGoodMan")
 					else:
-						return (username + " just lost " + str(gamble) + " points in the roulette FeelsBadMan")
 						db_manager.update_user(username, user_points - gamble)
+						return (username + " just lost " + str(gamble) + " points in the roulette FeelsBadMan")						
 
 	def give_points(username, db_manager, command_args):
 		username = str.lower(username)
