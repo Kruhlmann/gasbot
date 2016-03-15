@@ -93,9 +93,9 @@ def module_thread(s):
 	module_manager.add_module(TimeOutModule("Timeout"))
 	module_manager.add_module(DuelModule("Duel"))
 	module_manager.add_module(CustomCommandsModule("Custom Commands"))
-	#module_manager.add_module(ShowEmoteModule("Show Emote"))
+	module_manager.add_module(ShowEmoteModule("Show Emote"))
 	module_manager.add_module(RPSModule("Rock, Paper, Scissors"))
-	#module_manager.add_module(EmoteComboModule("Emote Combo"))
+	module_manager.add_module(EmoteComboModule("Emote Combo"))
 
 
 	while True:
@@ -108,6 +108,7 @@ def module_thread(s):
 				print("> " + username + ": " + message)
 			except:
 				print("> UTF-8 error")
+				del message_queue.recieve_queue[0]
 				continue
 
 			command_args = str.split(message, " ")

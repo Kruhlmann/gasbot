@@ -101,9 +101,12 @@ class Db_Manager():
 			print("Error getting JSON from user list")
 			return False
 
-	def add_points():
+	def add_points(self):
 		self.query("UPDATE user_points SET points = points + 1")
 		self.db.commit()
 
-	def reset_points():
+	def reset_points(self):
 		self.query("UPDATE user_points SET points = 0")
+
+	def is_emote(self, string):
+		return False
