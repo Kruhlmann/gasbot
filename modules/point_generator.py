@@ -1,6 +1,7 @@
 from architecture.module import Module
 import time
 import config
+from includes.termcolor import colored, cprint
 
 class PointGeneratorModule(Module):
 
