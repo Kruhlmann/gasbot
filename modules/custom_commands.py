@@ -28,7 +28,6 @@ class CustomCommandsModule(Module):
 		else:
 			p = q.fetchone()
 			if p is not None:
-				cprint("User " + username + " requested an execution of the custom command '" + command_args)
 				return format_command(p[0], username)
 			return None
 
@@ -45,4 +44,5 @@ class CustomCommandsModule(Module):
 		return hours, minutes, round(seconds)
 
 def format_command(command, username):
+	cprint("User " + username + " requested an execution of the custom command '" + command)
 	return command.replace("$username", username)

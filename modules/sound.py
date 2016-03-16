@@ -2,6 +2,8 @@ from architecture.module import Module
 import config
 import winsound
 
+from includes.termcolor import colored, cprint
+
 class SoundModule(Module):
 
 	def play_sound(username, db_manager, command_args):
@@ -16,7 +18,7 @@ class SoundModule(Module):
 			if points >= config.SOUND_COST:
 				if command_args[1] in config.sounds:
 					db_manager.update_user(username, points - config.SOUND_COST)
-					print("Playing sound " + "sound/" + command_args[1] + ".wav")
+					cprint("Playing sound " + "sound/" + command_args[1] + ".wav", "cyan")
 					winsound.PlaySound("sound/" + command_args[1] + ".wav", winsound.SND_FILENAME)
 					return(None)
 				else:
@@ -36,7 +38,7 @@ class SoundModule(Module):
 			if points >= config.PREMIUM_SOUND_COST:
 				if command_args[1] in config.premium_sounds:
 					db_manager.update_user(username, points - config.PREMIUM_SOUND_COST)
-					print("Playing premium sound " + "sound/" + command_args[1] + ".wav")
+					cprint("Playing premium sound " + "sound/" + command_args[1] + ".wav", "cyan")
 					winsound.PlaySound("sound/" + command_args[1] + ".wav", winsound.SND_FILENAME)
 					return(None)
 				else:
@@ -72,7 +74,7 @@ class SoundModule(Module):
 
 						if combo_name == command_args[1]:
 							db_manager.update_user(username, points - config.SOUND_COMBO_COST)
-							print("Playing sound combo " + combo_name)
+							cprint("Playing sound combo " + combo_name, "cyan")
 							winsound.PlaySound("sound/" + combo[1] + ".wav", winsound.SND_FILENAME)
 							winsound.PlaySound("sound/" + combo[2] + ".wav", winsound.SND_FILENAME)
 							return(None)

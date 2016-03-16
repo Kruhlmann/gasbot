@@ -3,6 +3,7 @@ import sqlite3
 import time
 import config
 from random import randint
+from includes.termcolor import colored, cprint
 
 class DuelModule(Module):
 
@@ -37,7 +38,7 @@ class DuelModule(Module):
 	
 	#'duelist2' has accepted the duel
 	def accept_duel(self, duelist1, db_manager):
-		print(duelist1 + " has accepted a duel!")
+		cprint(duelist1 + " has accepted a duel!", "cyan")
 		points = db_manager.get_user_points(duelist1)
 
 		db_manager.query("SELECT * FROM duels WHERE duelist2=\'" + duelist1 + "\'")

@@ -14,6 +14,7 @@ from modules.show_emote import ShowEmoteModule
 from modules.rps import RPSModule
 from modules.emote_combo import EmoteComboModule
 from modules.chat_log import ChatLogModule
+from modules.subscriber import SubscriberModule
 
 import socket #imports module allowing connection to IRC
 import threading #imports module allowing timing functions
@@ -101,6 +102,7 @@ def module_thread(s):
 	module_manager.add_module(RPSModule("Rock, Paper, Scissors"))
 	module_manager.add_module(EmoteComboModule("Emote Combo"))
 	module_manager.add_module(ChatLogModule("Chat Log"))
+	module_manager.add_module(SubscriberModule("Subscriber"))
 
 
 
@@ -114,9 +116,11 @@ def module_thread(s):
 				color = "white"
 				if username == "ruwbot":
 					color = "yellow"
+				if username == "twitchnotify":
+					color = "green"
 				cprint("> " + username + ": " + message, color)
 			except:
-				print("> UTF-8 error")
+				cprint("> UTF-8 error", "red", "on_white")
 				del message_queue.recieve_queue[0]
 				continue
 
@@ -126,7 +130,7 @@ def module_thread(s):
 			#Create user if not exists
 			if not db_manager.user_exists(username):
 				db_manager.create_user(username)
-				message_queue.send("Welcome " + username + "! You have now been registered in the database and will start earning points! PogChamp")
+				#message_queue.send("Welcome " + username + "! You have now been registered in the database and will start earning points! PogChamp")
 			
 			#REMOVE MESSAGEz
 			del message_queue.recieve_queue[0]

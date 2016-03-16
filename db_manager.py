@@ -42,7 +42,7 @@ class Db_Manager():
 			if not self.user_exists(username):
 				self.cursor.execute("INSERT INTO user_points VALUES ('" + username + "', " + str(points) + ")")
 		except sqlite3.Error as er:
-			print("Failed to create user " + username + ": " + er.message)
+			cprint("Failed to create user " + username + ": " + er.message, "red", "on_white")
 		self.db.commit()
 
 	def query(self, query):
@@ -86,24 +86,24 @@ class Db_Manager():
 			self.emote_db.commit()
 
 
-	def get_user_json():
+	def get_user_json(self):
 		try:
 			url = "http://tmi.twitch.tv/group/user/" + config.CHAN + "/chatters"
 			response = urllib2.urlopen(url)
 			data = json.loads(response.read().decode())
 			return data["chatters"]["viewers"]
 		except:
-			print("Error getting JSON from user list")
+			cprint("Error getting JSON from user list", "red", "on_white")
 			return False
 
-	def get_moderator_json():
+	def get_moderator_json(self):
 		try:
 			url = "http://tmi.twitch.tv/group/user/" + config.CHAN + "/chatters"
 			response = urllib2.urlopen(url)
 			data = json.loads(response.read().decode())
 			return data["chatters"]["moderators"]
 		except:
-			print("Error getting JSON from user list")
+			cprint("Error getting JSON from user list", "red", "on_white")
 			return False
 
 	def add_points(self):
