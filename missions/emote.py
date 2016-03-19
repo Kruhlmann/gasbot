@@ -1,7 +1,6 @@
 from architecture.module import Module
 from architecture.mission import Mission
 
-from includes.termcolor import colored, cprint
 import sqlite3
 import config
 
@@ -24,10 +23,10 @@ class EmoteMission(Mission):
 				user_points = db_manager.get_user_points(username)
 
 				if user_points == None:
-					cprint ("The user " + username + " was not found. Creating the user in the database now", "cyan")
+					print ("The user " + username + " was not found. Creating the user in the database now")
 					db_manager.create_user(username)
 				else:
-					cprint("Awarding user " + username + " " + str(self.prize) + " points", "cyan")
+					print("Awarding user " + username + " " + str(self.prize) + " points")
 					db_manager.update_user(username, user_points + self.prize)
 				self.result = "User " + username + " was the first to type " + self.emote + " in chat and has won " + str(self.prize) + " points!"
 				self.has_finished = True

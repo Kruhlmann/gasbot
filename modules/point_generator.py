@@ -1,7 +1,6 @@
 from architecture.module import Module
 import time
 import config
-from includes.termcolor import colored, cprint
 
 class PointGeneratorModule(Module):
 
@@ -15,4 +14,4 @@ class PointGeneratorModule(Module):
 		while time.time() - self.point_time > config.POINT_INTERVAL:
 			self.point_time += config.POINT_INTERVAL
 			db_manager.query("UPDATE user_points SET points = points + 1")
-			cprint("Added points to all users", "cyan")
+			print("Added points to all users")

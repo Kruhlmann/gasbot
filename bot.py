@@ -144,6 +144,7 @@ def sender_thread(s):
 		s.send(("PRIVMSG #" + config.CHAN + " :" + message + "\r\n").encode())
 
 	cprint("SENDER THREAD: ONLINE #" + config.CHAN, "green")
+	send_message("MrDestructoid GREETINGS HUMANS MrDestructoid")
 
 	while True:
 		for i in range(0, len(message_queue.sender_queue)):
@@ -162,7 +163,7 @@ if __name__ == "__main__":
 		exit()
 	try:
 		s.connect((config.HOST, config.PORT))
-		s.send(("CAP REQ :twitch.tv/membership \r\n").encode())
+		#s.send(("CAP REQ :twitch.tv/membership \r\n").encode())
 		s.send(("PASS " + config.PASS + "\r\n").encode())
 		s.send(("NICK " + config.NICK + "\r\n").encode())
 		s.send(("JOIN #" + config.CHAN + " \r\n").encode())

@@ -1,6 +1,5 @@
 from architecture.module import Module
 import time
-from includes.termcolor import colored, cprint
 
 class SubscriberModule(Module):
 
