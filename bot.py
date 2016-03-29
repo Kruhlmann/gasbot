@@ -50,6 +50,7 @@ def recive_thread(s):
 		readbuffer = temp.pop()
 		time.sleep(0.1)
 		for line in temp:
+			line = line.strip()
 			if (line[0] == "PING"):
 				s.send(("PONG %s\r\n" % line[1]).encode())
 			else:
@@ -59,8 +60,12 @@ def recive_thread(s):
 				if "QUIT" not in parts[1] and "JOIN" not in parts[1] and "PART" not in parts[1]:
 					try:
 						# Sets the message variable to the actual message sent 
-						message = parts[2][:len(parts[2]) - 1]
-					except:
+						message = ""
+						for x in range(2, len(parts)):
+							message += parts[x] + ":"
+						message = message[:-1]
+					except Exception as e:
+						print("An error has occured while computiong the user message " + str(e))
 						message = ""
 					# Sets the username variable to the actual username 
 					usernamesplit = str.split(parts[1], "!")
@@ -101,7 +106,7 @@ def module_thread(s):
 	module_manager.add_module(ChatLogModule("Chat Log"))
 	module_manager.add_module(SubscriberModule("Subscriber"))
 
-	#THIS MUST BE LAST
+	#THIS MUST BE LAST SO CUSTOM COMMANDS DO NOT OVERRIDE THE MODULE COMMANDS
 	module_manager.add_module(CustomCommandsModule("Custom Commands"))
 
 
