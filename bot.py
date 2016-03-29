@@ -45,14 +45,15 @@ def recive_thread(s):
 	print("RECIEV THREAD: ONLINE #" + config.CHAN)
 
 	while True:
-		readbuffer = readbuffer + s.recv(1024).decode()
+		readbuffer = readbuffer + s.recv(1024).decode("utf-8")
 		temp = str.split(readbuffer, "\n")
 		readbuffer = temp.pop()
 		time.sleep(0.1)
 		for line in temp:
 			line = line.strip()
-			if (line[0] == "PING"):
-				s.send(("PONG %s\r\n" % line[1]).encode())
+			if readbuffer.find('PING') != -1:
+				print("Pong!")
+				s.send(("PONG :tmi.twitch.tv\r\n").encode())
 			else:
 				# Splits the given string so we can work with it better 
 				parts = str.split(line, ":")
@@ -141,7 +142,7 @@ def sender_thread(s):
 		if message == None:
 			return
 		message_queue.recieve_queue.append(Message(config.NICK, message))
-		s.send(("PRIVMSG #" + config.CHAN + " :" + message + "\r\n").encode())
+		s.send(("PRIVMSG #" + config.CHAN + " :" + message + "\r\n").encode("utf-8"))
 
 	print("SENDER THREAD: ONLINE #" + config.CHAN)
 	send_message("MrDestructoid GREETINGS HUMANS MrDestructoid")
@@ -153,6 +154,14 @@ def sender_thread(s):
 			del message_queue.sender_queue[0]
 			time.sleep(1.5) 
 
+def pinger_thread(s):
+
+	print("PINGER THREAD: ONLINE #" + config.CHAN)
+
+	while True:
+		s.send(("PING irc.twitch.tv").encode())
+		print("Ping!")
+		time.sleep(300)
 
 if __name__ == "__main__":
 	s = socket.socket()
@@ -163,10 +172,10 @@ if __name__ == "__main__":
 		exit()
 	try:
 		s.connect((config.HOST, config.PORT))
-		#s.send(("CAP REQ :twitch.tv/membership \r\n").encode())
-		s.send(("PASS " + config.PASS + "\r\n").encode())
-		s.send(("NICK " + config.NICK + "\r\n").encode())
-		s.send(("JOIN #" + config.CHAN + " \r\n").encode())
+		#s.send(("CAP REQ :twitch.tv/membership \r\n").encode("utf-8"))
+		s.send(("PASS " + config.PASS + "\r\n").encode("utf-8"))
+		s.send(("NICK " + config.NICK + "\r\n").encode("utf-8"))
+		s.send(("JOIN #" + config.CHAN + " \r\n").encode("utf-8"))
 	except Exception:
 		print("Could not connect to Twitch IRC server! Exiting...")
 		exit()
@@ -174,7 +183,9 @@ if __name__ == "__main__":
 	recive_thread = threading.Thread(target=recive_thread, args=(s,))
 	module_thread = threading.Thread(target=module_thread, args=(s,))
 	sender_thread = threading.Thread(target=sender_thread, args=(s,))
+	pinger_thread = threading.Thread(target=pinger_thread, args=(s,))
 	print("Connecting to channel #" + config.CHAN + " with username ")
 	recive_thread.start()
 	module_thread.start()
 	sender_thread.start()
+	pinger_thread.start()
