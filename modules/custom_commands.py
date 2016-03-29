@@ -54,5 +54,5 @@ def format_command(command_name, command, username):
 	command = command.replace("$percentage", str(randint(0,100)) + "%" )
 	command = command.replace("$streamer", config.CHAN)
 	command = command.replace("$bot", config.NICK)
-	command = command.replace("$now", time.time())
+	command = command.replace("$now", str(time.time()))
 	return command
