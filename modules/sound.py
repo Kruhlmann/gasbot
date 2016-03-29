@@ -54,7 +54,7 @@ class SoundModule(Module):
 		else:
 			points = db_manager.get_user_points(username)
 
-			if points >= config.PREMIUM_SOUND_COST:
+			if points >= config.SOUND_COMBO_COST:
 				found_combo = 0
 				combo_name = ""
 
