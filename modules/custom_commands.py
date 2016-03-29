@@ -1,5 +1,6 @@
 from architecture.module import Module
 from custom.commands import command_list
+from random import randint
 import config
 import sqlite3
 
@@ -13,14 +14,14 @@ class CustomCommandsModule(Module):
 			cmd_body = ""
 			for i in range(2, len(command_args)):
 				cmd_body += command_args[i] + " "
-			db_manager.query("INSERT INTO commands VALUES (\'" + cmd_trigger + "\', \'" + cmd_body + "\')")
+			db_manager.query("INSERT INTO commands VALUES (\'" + cmd_body + "\', \'" + cmd_trigger + "\')")
 			db_manager.db.commit()
 			return "Command " + cmd_trigger + " added!"
 
 
 		for key, value in command_list.items():
 			if command_args[0] == key:
-				return value.replace("$username", username)
+				return format_command(key, value, username)
 
 		q = db_manager.query("SELECT body FROM commands WHERE trigger=\'" + command_args[0] + "\'")
 		if q == None:
@@ -28,7 +29,7 @@ class CustomCommandsModule(Module):
 		else:
 			p = q.fetchone()
 			if p is not None:
-				return format_command(p[0], username)
+				return format_command(command_args[0], p[0], username)
 			return None
 
 	def stop_watch(self):
@@ -43,6 +44,8 @@ class CustomCommandsModule(Module):
 			hours += 1
 		return hours, minutes, round(seconds)
 
-def format_command(command, username):
-	cprint("User " + username + " requested an execution of the custom command '" + command)
-	return command.replace("$username", username)
+def format_command(command_name, command, username):
+	print("User " + username + " requested an execution of the custom command '" + command_name)
+	command = command.replace("$username", username)
+	command = command.replace("$percentage", str(randint(0,100)) + "%" ) 
+	return command
