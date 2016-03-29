@@ -95,19 +95,21 @@ def module_thread(s):
 	module_manager.add_module(PointGeneratorModule("Point generator", time.time()))
 	module_manager.add_module(TimeOutModule("Timeout"))
 	module_manager.add_module(DuelModule("Duel"))
-	module_manager.add_module(CustomCommandsModule("Custom Commands"))
 	module_manager.add_module(ShowEmoteModule("Show Emote"))
 	module_manager.add_module(RPSModule("Rock, Paper, Scissors"))
 	module_manager.add_module(EmoteComboModule("Emote Combo"))
 	module_manager.add_module(ChatLogModule("Chat Log"))
 	module_manager.add_module(SubscriberModule("Subscriber"))
 
+	#THIS MUST BE LAST
+	module_manager.add_module(CustomCommandsModule("Custom Commands"))
+
 
 
 	while True:
 		while len(message_queue.recieve_queue) > 0:
 			message = message_queue.recieve_queue[0].message
-			username = message_queue.recieve_queue[0].username
+			username = message_queue.recieve_queue[0].username.lower()
 
 			#PROCESS MESSAGE
 			try:
