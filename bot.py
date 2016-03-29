@@ -27,8 +27,6 @@ import string
 import json
 import sqlite3
 
-from includes.termcolor import colored, cprint
-
 import message_queue
 from message_queue import Message
 import config
@@ -44,7 +42,7 @@ def recive_thread(s):
 	point_timer = int(round(time.time() * 1000))
 	readbuffer = ""
 
-	cprint("RECIEV THREAD: ONLINE #" + config.CHAN, "green")
+	print("RECIEV THREAD: ONLINE #" + config.CHAN)
 
 	while True:
 		readbuffer = readbuffer + s.recv(1024).decode()
@@ -78,7 +76,7 @@ def recive_thread(s):
 
 def module_thread(s):
 
-	cprint("MODULE THREAD: ONLINE #" + config.CHAN, "green")
+	print("MODULE THREAD: ONLINE #" + config.CHAN)
 	db_manager = Db_Manager(config.CHAN)
 	#Create databases
 	db_manager.create_table("`user_points`(user TEXT, points INT)")
@@ -113,14 +111,9 @@ def module_thread(s):
 
 			#PROCESS MESSAGE
 			try:
-				color = "white"
-				if username == "ruwbot":
-					color = "yellow"
-				if username == "twitchnotify":
-					color = "green"
-				cprint("> " + username + ": " + message, color)
+				print("> " + username + ": " + message)
 			except:
-				cprint("> UTF-8 error", "red", "on_white")
+				print("> UTF-8 error")
 				del message_queue.recieve_queue[0]
 				continue
 
@@ -143,7 +136,7 @@ def sender_thread(s):
 		message_queue.recieve_queue.append(Message(config.NICK, message))
 		s.send(("PRIVMSG #" + config.CHAN + " :" + message + "\r\n").encode())
 
-	cprint("SENDER THREAD: ONLINE #" + config.CHAN, "green")
+	print("SENDER THREAD: ONLINE #" + config.CHAN)
 	send_message("MrDestructoid GREETINGS HUMANS MrDestructoid")
 
 	while True:
@@ -156,10 +149,10 @@ def sender_thread(s):
 
 if __name__ == "__main__":
 	s = socket.socket()
-	cprint("Connecting to server " + config.HOST + ":" + str(config.PORT), "cyan")
+	print("Connecting to server " + config.HOST + ":" + str(config.PORT))
 
 	if config.PASS == "oauth:":
-		cprint("You did not specify any password for the bot in the password.py file. Exiting...", 'yellow')
+		print("You did not specify any password for the bot in the password.py file. Exiting...")
 		exit()
 	try:
 		s.connect((config.HOST, config.PORT))
@@ -168,13 +161,13 @@ if __name__ == "__main__":
 		s.send(("NICK " + config.NICK + "\r\n").encode())
 		s.send(("JOIN #" + config.CHAN + " \r\n").encode())
 	except Exception:
-		cprint("Could not connect to Twitch IRC server! Exiting...", "red", "on_white")
+		print("Could not connect to Twitch IRC server! Exiting...")
 		exit()
 
 	recive_thread = threading.Thread(target=recive_thread, args=(s,))
 	module_thread = threading.Thread(target=module_thread, args=(s,))
 	sender_thread = threading.Thread(target=sender_thread, args=(s,))
-	cprint("Connecting to channel #" + config.CHAN + " with username " + config.NICK, "cyan")
+	print("Connecting to channel #" + config.CHAN + " with username ")
 	recive_thread.start()
 	module_thread.start()
 	sender_thread.start()

@@ -1,7 +1,6 @@
 #db_manager.py
 import sqlite3
 import json
-from includes.termcolor import colored, cprint
 
 try:
 	import urllib.request as urllib2
@@ -42,7 +41,7 @@ class Db_Manager():
 			if not self.user_exists(username):
 				self.cursor.execute("INSERT INTO user_points VALUES ('" + username + "', " + str(points) + ")")
 		except sqlite3.Error as er:
-			cprint("Failed to create user " + username + ": " + er.message, "red", "on_white")
+			print("Failed to create user " + username + ": " + er.message)
 		self.db.commit()
 
 	def query(self, query):
@@ -51,7 +50,7 @@ class Db_Manager():
 			self.db.commit()
 			return self.cursor
 		except sqlite3.OperationalError as e:
-			cprint("Sqlite exception in query function: `" + str(e) + "` on query `" + query + "`", "red", "on_white")
+			print("Sqlite exception in query function: `" + str(e) + "` on query `" + query + "`")
 			return None
 
 	def get_cursor(self):
@@ -93,7 +92,7 @@ class Db_Manager():
 			data = json.loads(response.read().decode())
 			return data["chatters"]["viewers"]
 		except:
-			cprint("Error getting JSON from user list", "red", "on_white")
+			print("Error getting JSON from user list")
 			return False
 
 	def get_moderator_json(self):
@@ -103,7 +102,7 @@ class Db_Manager():
 			data = json.loads(response.read().decode())
 			return data["chatters"]["moderators"]
 		except:
-			cprint("Error getting JSON from user list", "red", "on_white")
+			print("Error getting JSON from user list")
 			return False
 
 	def add_points(self):
