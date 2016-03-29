@@ -40,7 +40,7 @@ class PointsCommandsModule(Module):
 
 	def give_points(username, db_manager, command_args):
 		username = str.lower(username)
-		if not username == "gasolinebased" or not username == config.NICK:
+		if not username == "gasolinebased":
 			points = 100
 			user = "gasolinebased"
 			if len(command_args) > 1:
