@@ -1,7 +1,7 @@
 # gasbot
 A feature rich twitch moderation bot made with python 3.*
 
-Old code can be found at my ruwbot repo
+Old code can be found at the [ruwbot](https://github.com/Kruhlmann/ruwbot) repository
 
 ### Questions, concerns and suggestions
 If you want to contact me the best way is to join my discord server. You do not need to download anything as there is a web application. [Join the discord](https://discord.gg/0k3DuGIrUjI25sUu). You can also message me [Twitch](https://www.twitch.tv/message/compose?to=gasolinebased) or send me an [e-mail](mailto:gasolinebased@gmail.com).
