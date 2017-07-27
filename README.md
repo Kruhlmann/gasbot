@@ -45,6 +45,12 @@ Allows users to time eachother out for a specified amount of time and a cost of 
 #### [Show Emote Module](modules/show_emote.py)
 Using the `!showemote emote` command will display the specified emote on the broadcasters stream if they are running the [Emote Displayer](https://github.com/Kruhlmann/EmoteDisplayer) program.
 
+#### [Song Request Module](modules/song_request.py)
+Allows users to request songs to be played during the stream. Songs will be queued up on a come-first serve-first basis. To request a song a user can call the command !songrequest or !sr with parameters being a youtube.com URL, youtu.be URL, a YouTube video ID or a YouTube query. Songs are played through the player thread.
+
+#### [Pleb List Module](modules/pleblist.py)
+Picks a random song from the pleblist.txt file and adds it to the queue.
+
 ## Missions
 
 Missions can be activated by the broadcaster and the user(s) to fulfill the requirements for the mission will be awarded points upon ending.
