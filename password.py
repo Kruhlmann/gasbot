@@ -1,1 +1,1 @@
-PASS = "oauth:sjrf7f7r3mjrxxj14njmb9jxn8436y"
+PASS = "oauth:"
