@@ -30,9 +30,6 @@ Gives users 1 point every `x` second where `x` is decided by the broadcaster in 
 #### [Uptime Module](modules/uptime.py)
 Displays how long the bot has been running for when recieving the `!uptime` command
 
-#### [Autism Module](modules/autism.py)
-Displays a semi-random level of 'autism' for a specific user with the `!autism user` command. If no user is specified it will target the sender.
-
 #### [Custom Commands Module](modules/custom_commands.py)
 Allows the broadcaster to specify simple custom commands with a trigger command and a bot response in the custom/commands.py file
 
