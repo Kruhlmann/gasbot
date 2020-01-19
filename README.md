@@ -13,7 +13,7 @@ Download the source code and place it somewhere on your computer. Make sure you 
 ## Modules
 
 #### [Test Module](modules/test.py)
-Displays the emote Kappa every time it recieves input form the channel.
+Displays the emote Kappa every time it recieves input from the channel.
 
 #### [Sound Module](modules/sound.py)
 Allows users to play sounds on the broadcasters computer for a cost of points set by the broadcaster in the configuration file
